@@ -1,5 +1,6 @@
 package de.mahler.fixtures
 
+import de.mahler.fixtures.entities.TestEntity
 import org.hibernate.SessionFactory
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -8,11 +9,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
-
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.Id
 
 import static org.junit.Assert.assertEquals
 import static org.junit.Assert.assertNotNull
@@ -53,19 +49,19 @@ class HibernateFixtureBuilderTest extends AbstractTransactionalJUnit4SpringConte
     }
 
 
-    @Entity
-    class TestEntity {
-
-        @Id
-        @GeneratedValue
-        Long id;
-
-        @Column
-        String name
-
-        @Column
-        int value
-
-    }
+//    @Entity
+//    class TestEntity {
+//
+//        @Id
+//        @GeneratedValue
+//        Long id;
+//
+//        @Column
+//        String name
+//
+//        @Column
+//        int value
+//
+//    }
 
 }

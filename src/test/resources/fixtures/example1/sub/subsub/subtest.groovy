@@ -1,7 +1,7 @@
 package fixtures.example1.sub.subsub
 
-import de.mahler.fixtures.entities.TestEntity
+import de.mahler.fixtures.entities.SomeEntity
 
 build {
-    test3(TestEntity, property: 'test3')
+    test3(SomeEntity, property: 'test3')
 }

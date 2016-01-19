@@ -5,9 +5,6 @@ import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 
-/**
- * Some ordinary yet simple jpa entity to test against
- */
 @Entity
 class TestEntity {
 

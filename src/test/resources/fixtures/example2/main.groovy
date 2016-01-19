@@ -1,10 +1,9 @@
 package fixtures.example2
 
-import de.mahler.fixtures.entities.TestEntity
-
+import de.mahler.fixtures.entities.SomeEntity
 
 build {
-    example2_test1(TestEntity, property: 'test1')
+    example2_test1(SomeEntity, property: 'test1')
 }
 
 

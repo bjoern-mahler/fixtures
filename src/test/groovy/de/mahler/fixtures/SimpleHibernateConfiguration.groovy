@@ -21,7 +21,7 @@ class SimpleHibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource);
-        sessionFactory.setPackagesToScan("de.spinwork.datacuke.entities");
+        sessionFactory.setPackagesToScan("de.mahler.fixtures.entities");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;

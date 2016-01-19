@@ -9,9 +9,7 @@ public class AnotherEntity {
 
     @Id
     @GeneratedValue
-    private Long id;
+    Long id;
 
-    public Long getId() {
-        return id;
-    }
+
 }
