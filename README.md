@@ -8,6 +8,8 @@ This project is strongly influenced by the great fixtures and test-data plugins 
 
 ## Usage
 
+
+### Build/Save a fixture
 Main method of the dsl is called `build` which takes a closure with a block of fixtures with a name, the type (of type Class) of the object to be instantiated followed by map of properties:
 
 `nameOfFixture(Type, nameOfProperty1: 'value1', nameOfProperty2: 'value2',...)`
@@ -18,6 +20,19 @@ If you choosed the `BasicFixtureBuilder` an instance of the choosen class will b
 build {
     test1(SomeEntity, property: 'test')
 }
+```
+
+### Get a fixture
+To get a fixture you already created before and use it in tests you can call:
+```groovy
+   //e.g. in a unit test class
+    @Autowired
+    Fixtures fixtures
+   
+    @Test
+    void testSomething() {
+        assertEquals 'test', fixtures.test1.property
+    }
 ```
 
 
