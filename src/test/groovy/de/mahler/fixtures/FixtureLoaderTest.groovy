@@ -1,14 +1,12 @@
 package de.mahler.fixtures
 
-/**
- */
 class FixtureLoaderTest extends GroovyTestCase {
 
     void testLoadScriptForExample1Only() {
         Fixtures fixtures = new Fixtures(new BasicFixtureBuilder())
         FixtureLoader loader = new FixtureLoader(fixtures)
         loader.pathToFixtures = 'fixtures/example1'
-        loader.load()
+        loader.loadAll()
 
         assertEquals 3, fixtures.size()
     }
@@ -17,7 +15,7 @@ class FixtureLoaderTest extends GroovyTestCase {
         Fixtures fixtures = new Fixtures(new BasicFixtureBuilder())
         FixtureLoader loader = new FixtureLoader(fixtures)
         loader.pathToFixtures = 'fixtures/example1'
-        loader.load()
+        loader.loadAll()
 
         assertEquals 'test3', fixtures.test3.property //located in subtest.groovy
     }
@@ -25,7 +23,7 @@ class FixtureLoaderTest extends GroovyTestCase {
     void testLoadAllFixtures() {
         Fixtures fixtures = new Fixtures(new BasicFixtureBuilder())
         FixtureLoader loader = new FixtureLoader(fixtures)
-        loader.load()
+        loader.loadAll()
 
         assertEquals 4, fixtures.size()
     }

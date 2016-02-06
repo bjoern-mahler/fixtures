@@ -15,7 +15,7 @@ import org.springframework.util.Assert
  *
  */
 @Component
-class Fixtures {
+class Fixtures implements FixtureSyntax {
 
     FixtureBuilder fixtureBuilder
 
@@ -28,6 +28,12 @@ class Fixtures {
         def builderClosure = closure.rehydrate(fixtureBuilder, this, this)
         builderClosure.resolveStrategy = Closure.DELEGATE_FIRST
         builderClosure()
+    }
+
+    @Override
+    void post(String fixtureName, Closure closure) {
+        println "calling post closure on: $fixtureName with code: $closure"
+        println "the fixture with name $fixtureName has following data: ${fixtureBuilder.fixtures[fixtureName].toString()}"
     }
 
     def propertyMissing(String name) {

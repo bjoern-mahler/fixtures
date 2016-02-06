@@ -1,5 +1,6 @@
 package de.mahler.fixtures
 
+import org.codehaus.groovy.control.CompilerConfiguration
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
@@ -22,10 +23,16 @@ class FixtureLoader {
     @Autowired
     FixtureLoader(Fixtures fixtures) {
         this.fixtures = fixtures
-        this.shell = new GroovyShell()
+        def compilerConfiguration = new CompilerConfiguration()
+        compilerConfiguration.scriptBaseClass = DelegatingScript.class.name
+        this.shell = new GroovyShell(this.class.classLoader, compilerConfiguration)
     }
 
-    def load() {
+    /**
+     * Loads all fixture resources (groovy scripts with declaration of fixtures written with fixtures dsl) in the
+     * fixtures path (defaults to 'fixtures'). Has to be on the classpath.
+     */
+    void loadAll() {
         Resource[] resources = new PathMatchingResourcePatternResolver().getResources("classpath:$pathToFixtures/**/*.groovy")
         resources.each { Resource resource ->
             Script script = parseScript(resource)
@@ -33,24 +40,23 @@ class FixtureLoader {
         }
     }
 
-    private Script parseScript(Resource resource) {
-        Script script = shell.parse(resource.file)
-
-        script.metaClass = createEMC(script.class, {
-            ExpandoMetaClass emc ->
-                emc.build = { Closure cl ->
-                    fixtures.build(cl)      //for a found method build use fixtures build method instead...
-                }
-        })
-
-        return script
+    /**
+     * Loads all fixtures defined in the given classpath resource
+     * @param resource
+     */
+    void load(String resource) {
+        throw new UnsupportedOperationException('implement me')
     }
 
-    private static ExpandoMetaClass createEMC(Class clazz, Closure cl) {
-        ExpandoMetaClass emc = new ExpandoMetaClass(clazz, false)
-        cl(emc)
-        emc.initialize()
-        return emc
+    /**
+     * parsing the script and delegating unknown methods to the Fixtures class
+     * @param resource
+     * @return
+     */
+    private Script parseScript(Resource resource) {
+        DelegatingScript script = shell.parse(resource.file) as DelegatingScript
+        script.setDelegate(fixtures)
+        return script
     }
 
 }

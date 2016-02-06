@@ -1,5 +1,6 @@
 package de.mahler.fixtures
 
+import de.mahler.fixtures.entities.SomeEntity
 import groovy.transform.ToString
 
 class TestFixtures extends GroovyTestCase {
